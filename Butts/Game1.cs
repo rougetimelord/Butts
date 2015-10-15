@@ -29,8 +29,10 @@ namespace Butts
         static float _t = 0;
         List<int> _k = new List<int>();
         string _sc;
-        int _s = 420, _i=0;
+        int _s = 0, _i=0;
         FontRenderer _fontRenderer;
+        int wr = 0;
+        List<int> wk = new List<int>();
         #endregion
         public Game1()
             : base()
@@ -107,26 +109,37 @@ namespace Butts
 
             // TODO: Add your update logic here
             KeyHandler.Handler(Keyboard.GetState(), gameTime);
-            if (_s >= 420)
+            if (_s >= 419)
             {
                 //blaze it code
-                if (_s == 420)
+                if (_s == 419)
                 {
                     _i = 5;
                 }
-                if (_i == 5)
-                {
-                    //every 5 updates add new weed
-                    _weeds.Add(new Weed());
-                }
-                _i = (_i >= 6) ? 0 : _i + 1;
-                foreach(Weed we in _weeds)
-                {
-                    //update position
-                    we.Update();
-                }
+                _i = (_i == 30) ? 0 : _i + 1;
             }
-            //If no enemies add them or t = 15
+            if (_i == 5)
+            {
+                //every 5 updates add new weed
+                _weeds.Add(new Weed());
+            }
+            wr = 0;
+            wk.Clear();
+            foreach (Weed we in _weeds)
+            {
+                //update position
+                we.Update();
+                if(we.position.Y > _fullscreen.Y)
+                    wk.Add(wr);
+                wr++;
+            }
+            int w2 = 0;
+            for (int wi = (wk.Count != 0) ? 0 : 1; wi < wk.Count; wi++ )
+            {
+                _weeds.RemoveAt(wk[wi] - w2);
+                w2++;
+            }
+                //If no enemies add them or t = 15
             if (_enemies.Count == 0 || _t == 15)
                 _enemies.Add(new Enemy());
             int i = 0;
@@ -177,10 +190,13 @@ namespace Butts
                 //spriteBatch.DrawString(arial, "Dead", new Vector2(_fullscreen.X / 2, _fullscreen.Y / 2), Color.White)
                 Exit();
             }
+            foreach (Weed we in _weeds)
+            {
+                Vector2 origin = new Vector2(weed.Width / 8, weed.Height / 8);
+                spriteBatch.Draw(weed, we.position, null, we.c, we.rot, origin, (float)0.25, SpriteEffects.None, 0);
+            }
             if (!PositionChecker.dd)
             {
-                foreach (Weed we in _weeds)
-                        spriteBatch.Draw(weed, we.position, Color.Green);
                 spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : _attacker, Color.Red);
                 spriteBatch.Draw(_hi, Player.hiLocation, Color.White);
                 foreach (Enemy en in _enemies)
