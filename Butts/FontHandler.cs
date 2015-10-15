@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace BmFont
+namespace FontHandler
 {
     [Serializable]
     [XmlRoot("font")]

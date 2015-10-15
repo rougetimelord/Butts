@@ -1,5 +1,6 @@
 ﻿#region Using Statements
 using System;
+using System.IO;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -74,6 +75,9 @@ namespace Butts
             //arial = Content.Load<SpriteFont>("Arial.xnb");
             _hiAt = this.Content.Load<Texture2D>("HIatt");
             _hi = this.Content.Load<Texture2D>("HI");
+            var fontFilePath = Path.Combine(Content.RootDirectory, "text.fnt");
+            var fontFile = FontHandler.FontLoader.Load(fontFilePath);
+            var fontTexture = this.Content.Load<Texture2D>("text_0.png");
             #endregion
             // TODO: use this.Content to load your game content here
         }
