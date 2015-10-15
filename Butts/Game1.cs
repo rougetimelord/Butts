@@ -19,16 +19,17 @@ namespace Butts
         GraphicsDeviceManager graphics;
         #region init
         SpriteBatch spriteBatch;
-        Texture2D _hi, _hiAt;
+        Texture2D _hi, _hiAt, weed;
         //SpriteFont arial;
         static public Vector2 _fullscreen, _attacker;
         public static float _speed = 5;
         public static bool _attack = false;
         static List<Enemy> _enemies = new List<Enemy>();
+        static List<Weed> _weeds = new List<Weed>();
         static float _t = 0;
         List<int> _k = new List<int>();
         string _sc;
-        int _s = 0;
+        int _s = 420, _i=0;
         FontRenderer _fontRenderer;
         #endregion
         public Game1()
@@ -78,8 +79,9 @@ namespace Butts
             _hi = this.Content.Load<Texture2D>("HI");
             var fontFilePath = Path.Combine(Content.RootDirectory, "text.fnt");
             var fontFile = FontHandler.FontLoader.Load(fontFilePath);
-            var fontTexture = this.Content.Load<Texture2D>("text_0.png");
+            var fontTexture = this.Content.Load<Texture2D>("text_0");
             _fontRenderer = new FontRenderer(fontFile, fontTexture);
+            weed = this.Content.Load<Texture2D>("Weed");
             #endregion
             // TODO: use this.Content to load your game content here
         }
@@ -105,6 +107,25 @@ namespace Butts
 
             // TODO: Add your update logic here
             KeyHandler.Handler(Keyboard.GetState(), gameTime);
+            if (_s >= 420)
+            {
+                //blaze it code
+                if (_s == 420)
+                {
+                    _i = 5;
+                }
+                if (_i == 5)
+                {
+                    //every 5 updates add new weed
+                    _weeds.Add(new Weed());
+                }
+                _i = (_i >= 6) ? 0 : _i + 1;
+                foreach(Weed we in _weeds)
+                {
+                    //update position
+                    we.Update();
+                }
+            }
             //If no enemies add them or t = 15
             if (_enemies.Count == 0 || _t == 15)
                 _enemies.Add(new Enemy());
@@ -115,7 +136,7 @@ namespace Butts
                 en.Update(Player.hiLocation);
                 if (!en.alive)
                 {
-                    //if dead add the to the "kill" list
+                    //if dead add this instance to the "kill" list
                     _k.Add(i);
                 }
                 //increase index
@@ -137,7 +158,7 @@ namespace Butts
             //Set draw position of the attack shape
             _attacker = new Vector2(Player.hiLocation.X - 75, Player.hiLocation.Y - 75);
             //Increment or reset spawn timer
-            _t = (_t > 60) ? 0 : _t + 1;
+            _t = (_t > 60) ? 0 : _t+1;
             _sc = _s.ToString();
             base.Update(gameTime);
         }
@@ -158,10 +179,12 @@ namespace Butts
             }
             if (!PositionChecker.dd)
             {
+                foreach (Weed we in _weeds)
+                        spriteBatch.Draw(weed, we.position, Color.Green);
                 spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : _attacker, Color.Red);
                 spriteBatch.Draw(_hi, Player.hiLocation, Color.White);
                 foreach (Enemy en in _enemies)
-                spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
+                    spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
                 _fontRenderer.DrawText(spriteBatch, 50, 50, _sc);
             }
             spriteBatch.End();

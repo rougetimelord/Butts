@@ -29,3 +29,4 @@ C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debu
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\MonoGame.Framework.xml
 C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\text_0.png
 C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\text.fnt
+C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\Weed.png
