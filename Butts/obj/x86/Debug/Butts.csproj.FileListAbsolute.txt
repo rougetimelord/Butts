@@ -27,4 +27,5 @@ C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debu
 C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\HIatt.png
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\Icon.ico
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\MonoGame.Framework.xml
-C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\Arial.xnb
+C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\text_0.png
+C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\text.fnt

@@ -26,6 +26,8 @@ namespace Butts
         static List<Enemy> _enemies = new List<Enemy>();
         static float _t = 0;
         List<int> _k = new List<int>();
+        string _sc;
+        int _s = 0;
         #endregion
         public Game1()
             : base()
@@ -97,7 +99,7 @@ namespace Butts
 
             // TODO: Add your update logic here
             KeyHandler.Handler(Keyboard.GetState(), gameTime);
-            //If no enemies add them
+            //If no enemies add them or t = 15
             if (_enemies.Count == 0 || _t == 15)
                 _enemies.Add(new Enemy());
             int i = 0;
@@ -120,6 +122,7 @@ namespace Butts
                //Some glitches when multiple enemies are killed on the same update
                 if (_k[i] >= 0)
                 {
+                    _s++;
                     _enemies.RemoveAt(_k[i]-i2);
                     i2++;
                 }
@@ -129,6 +132,7 @@ namespace Butts
             _attacker = new Vector2(Player.hiLocation.X - 75, Player.hiLocation.Y - 75);
             //Increment or reset spawn timer
             _t = (_t > 60) ? 0 : _t + 1;
+            _sc = _s.ToString();
             base.Update(gameTime);
         }
 
