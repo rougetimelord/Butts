@@ -35,6 +35,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FontRenderer.cs" />
     <Compile Include="FontHandler.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Position Changers\PositionChecker.cs" />

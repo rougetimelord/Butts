@@ -29,6 +29,7 @@ namespace Butts
         List<int> _k = new List<int>();
         string _sc;
         int _s = 0;
+        FontRenderer _fontRenderer;
         #endregion
         public Game1()
             : base()
@@ -78,6 +79,7 @@ namespace Butts
             var fontFilePath = Path.Combine(Content.RootDirectory, "text.fnt");
             var fontFile = FontHandler.FontLoader.Load(fontFilePath);
             var fontTexture = this.Content.Load<Texture2D>("text_0.png");
+            _fontRenderer = new FontRenderer(fontFile, fontTexture);
             #endregion
             // TODO: use this.Content to load your game content here
         }
@@ -159,7 +161,8 @@ namespace Butts
                 spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : _attacker, Color.Red);
                 spriteBatch.Draw(_hi, Player.hiLocation, Color.White);
                 foreach (Enemy en in _enemies)
-                    spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
+                spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
+                _fontRenderer.DrawText(spriteBatch, 50, 50, _sc);
             }
             spriteBatch.End();
             base.Draw(gameTime);
