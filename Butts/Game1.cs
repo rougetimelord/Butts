@@ -1,5 +1,6 @@
 ﻿#region Using Statements
 using System;
+using System.IO;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -26,6 +27,9 @@ namespace Butts
         static List<Enemy> _enemies = new List<Enemy>();
         static float _t = 0;
         List<int> _k = new List<int>();
+        string _sc;
+        int _s = 0;
+        FontRenderer _fontRenderer;
         #endregion
         public Game1()
             : base()
@@ -72,6 +76,10 @@ namespace Butts
             //arial = Content.Load<SpriteFont>("Arial.xnb");
             _hiAt = this.Content.Load<Texture2D>("HIatt");
             _hi = this.Content.Load<Texture2D>("HI");
+            var fontFilePath = Path.Combine(Content.RootDirectory, "text.fnt");
+            var fontFile = FontHandler.FontLoader.Load(fontFilePath);
+            var fontTexture = this.Content.Load<Texture2D>("text_0.png");
+            _fontRenderer = new FontRenderer(fontFile, fontTexture);
             #endregion
             // TODO: use this.Content to load your game content here
         }
@@ -97,7 +105,7 @@ namespace Butts
 
             // TODO: Add your update logic here
             KeyHandler.Handler(Keyboard.GetState(), gameTime);
-            //If no enemies add them
+            //If no enemies add them or t = 15
             if (_enemies.Count == 0 || _t == 15)
                 _enemies.Add(new Enemy());
             int i = 0;
@@ -120,6 +128,7 @@ namespace Butts
                //Some glitches when multiple enemies are killed on the same update
                 if (_k[i] >= 0)
                 {
+                    _s++;
                     _enemies.RemoveAt(_k[i]-i2);
                     i2++;
                 }
@@ -129,6 +138,7 @@ namespace Butts
             _attacker = new Vector2(Player.hiLocation.X - 75, Player.hiLocation.Y - 75);
             //Increment or reset spawn timer
             _t = (_t > 60) ? 0 : _t + 1;
+            _sc = _s.ToString();
             base.Update(gameTime);
         }
 
@@ -151,7 +161,8 @@ namespace Butts
                 spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : _attacker, Color.Red);
                 spriteBatch.Draw(_hi, Player.hiLocation, Color.White);
                 foreach (Enemy en in _enemies)
-                    spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
+                spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
+                _fontRenderer.DrawText(spriteBatch, 50, 50, _sc);
             }
             spriteBatch.End();
             base.Draw(gameTime);
