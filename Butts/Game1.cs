@@ -19,8 +19,7 @@ namespace Butts
         GraphicsDeviceManager graphics;
         #region init
         SpriteBatch spriteBatch;
-        Texture2D _hi, _hiAt, weed;
-        //SpriteFont arial;
+        Texture2D _hi, _hiAt, _weed, _gun;
         static public Vector2 _fullscreen, _attacker;
         public static float _speed = 5;
         public static bool _attack = false;
@@ -29,7 +28,7 @@ namespace Butts
         static float _t = 0;
         List<int> _k = new List<int>();
         string _sc;
-        int _s = 0, _i=0;
+        int _s = 420, _i=0;
         FontRenderer _fontRenderer;
         int wr = 0;
         List<int> wk = new List<int>();
@@ -83,7 +82,8 @@ namespace Butts
             var fontFile = FontHandler.FontLoader.Load(fontFilePath);
             var fontTexture = this.Content.Load<Texture2D>("text_0");
             _fontRenderer = new FontRenderer(fontFile, fontTexture);
-            weed = this.Content.Load<Texture2D>("Weed");
+            _weed = this.Content.Load<Texture2D>("Weed");
+            _gun = this.Content.Load<Texture2D>("gun");
             #endregion
             // TODO: use this.Content to load your game content here
         }
@@ -192,8 +192,8 @@ namespace Butts
             }
             foreach (Weed we in _weeds)
             {
-                Vector2 origin = new Vector2(weed.Width / 8, weed.Height / 8);
-                spriteBatch.Draw(weed, we.position, null, we.c, we.rot, origin, (float)0.25, SpriteEffects.None, 0);
+                Vector2 origin = new Vector2((we.sprite == 0) ? _weed.Width : _gun.Width * we.scale, (we.sprite == 0) ? _weed.Height : _gun.Height * we.scale);
+                spriteBatch.Draw( (we.sprite == 0) ? _weed : _gun, we.position, null, we.c, we.rot, origin, we.scale, SpriteEffects.None, 0);
             }
             if (!PositionChecker.dd)
             {
