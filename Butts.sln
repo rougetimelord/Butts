@@ -15,6 +15,7 @@ Global
 		{73C02FC8-856A-41EC-A837-90445A1FCFC6}.Debug|x86.Build.0 = Debug|x86
 		{73C02FC8-856A-41EC-A837-90445A1FCFC6}.Release|x86.ActiveCfg = Release|x86
 		{73C02FC8-856A-41EC-A837-90445A1FCFC6}.Release|x86.Build.0 = Release|x86
+		{73C02FC8-856A-41EC-A837-90445A1FCFC6}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

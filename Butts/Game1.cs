@@ -96,7 +96,6 @@ namespace Butts
         {
             // TODO: Unload any non ContentManager content here
         }
-
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -162,7 +161,8 @@ namespace Butts
                //Some glitches when multiple enemies are killed on the same update
                 if (_k[i] >= 0)
                 {
-                    _s++;
+                    if(!PositionChecker.dd)
+                        _s++;
                     _enemies.RemoveAt(_k[i]-i2);
                     i2++;
                 }
@@ -171,7 +171,7 @@ namespace Butts
             //Set draw position of the attack shape
             _attacker = new Vector2(Player.hiLocation.X - 75, Player.hiLocation.Y - 75);
             //Increment or reset spawn timer
-            _t = (_t > 60) ? 0 : _t+1;
+            _t = (_t > 30) ? 0 : _t+1;
             _sc = _s.ToString();
             base.Update(gameTime);
         }
@@ -187,9 +187,9 @@ namespace Butts
             spriteBatch.Begin();
             if (PositionChecker.dd)
             {
-                //spriteBatch.DrawString(arial, "Dead", new Vector2(_fullscreen.X / 2, _fullscreen.Y / 2), Color.White)
-                Exit();
+                _fontRenderer.DrawText(spriteBatch, ((int)_fullscreen.X / 2), (int)_fullscreen.Y / 2, "Game Over");
             }
+            _fontRenderer.DrawText(spriteBatch, (!PositionChecker.dd) ? 50 : (int)_fullscreen.X / 2, (!PositionChecker.dd) ? 50 : (int)_fullscreen.Y / 2 - 32, _sc);
             foreach (Weed we in _weeds)
             {
                 Vector2 origin = new Vector2((we.sprite == 0) ? _weed.Width : _gun.Width * we.scale, (we.sprite == 0) ? _weed.Height : _gun.Height * we.scale);
@@ -201,7 +201,6 @@ namespace Butts
                 spriteBatch.Draw(_hi, Player.hiLocation, Color.White);
                 foreach (Enemy en in _enemies)
                     spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
-                _fontRenderer.DrawText(spriteBatch, 50, 50, _sc);
             }
             spriteBatch.End();
             base.Draw(gameTime);
