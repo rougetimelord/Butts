@@ -3,7 +3,7 @@ Butts
 
 ######Dependencies:
 
-Monogame framewwork
+Monogame framework
 
 
 ######Description
