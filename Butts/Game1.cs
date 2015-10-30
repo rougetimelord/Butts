@@ -19,7 +19,7 @@ namespace Butts
         GraphicsDeviceManager graphics;
         #region init
         SpriteBatch spriteBatch;
-        Texture2D _hi, _hiAt, _weed, _gun;
+        Texture2D _hi, _hiAt;
         static public Vector2 _fullscreen, _attacker;
         public static float _speed = 5;
         public static bool _attack = false;
@@ -64,6 +64,7 @@ namespace Butts
             #endregion
             //Spawn player
             new Player();
+            Position_Changers.Tilt.TiltTest();
             base.Initialize();
         }
         /// <summary>
@@ -82,8 +83,12 @@ namespace Butts
             var fontFile = FontHandler.FontLoader.Load(fontFilePath);
             var fontTexture = this.Content.Load<Texture2D>("text_0");
             _fontRenderer = new FontRenderer(fontFile, fontTexture);
-            _weed = this.Content.Load<Texture2D>("Weed");
-            _gun = this.Content.Load<Texture2D>("gun");
+            var weed = this.Content.Load<Texture2D>("Weed");
+            var gun = this.Content.Load<Texture2D>("gun");
+            var dor = this.Content.Load<Texture2D>("doritos");
+            var mtn = this.Content.Load<Texture2D>("mtn");
+            var hit = this.Content.Load<Texture2D>("hit");
+            Weed.Sprites(weed, gun, dor, mtn, hit);
             #endregion
             // TODO: use this.Content to load your game content here
         }
@@ -108,6 +113,8 @@ namespace Butts
 
             // TODO: Add your update logic here
             KeyHandler.Handler(Keyboard.GetState(), gameTime);
+            if (Position_Changers.Tilt._r)
+                Position_Changers.Tilt.Update();
             if (_s >= 419)
             {
                 //blaze it code
@@ -185,15 +192,11 @@ namespace Butts
             GraphicsDevice.Clear(Color.Black);
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            if (PositionChecker.dd)
-            {
-                _fontRenderer.DrawText(spriteBatch, ((int)_fullscreen.X / 2), (int)_fullscreen.Y / 2, "Game Over");
-            }
-            _fontRenderer.DrawText(spriteBatch, (!PositionChecker.dd) ? 50 : (int)_fullscreen.X / 2, (!PositionChecker.dd) ? 50 : (int)_fullscreen.Y / 2 - 32, _sc);
             foreach (Weed we in _weeds)
             {
-                Vector2 origin = new Vector2((we.sprite == 0) ? _weed.Width : _gun.Width * we.scale, (we.sprite == 0) ? _weed.Height : _gun.Height * we.scale);
-                spriteBatch.Draw( (we.sprite == 0) ? _weed : _gun, we.position, null, we.c, we.rot, origin, we.scale, SpriteEffects.None, 0);
+                Vector2 origin = new Vector2(we.sprite.Width / 2, we.sprite.Height / 2);
+                spriteBatch.Draw(we.sprite, we.position, null, we.c, we.rot, origin, we.scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(Weed._hit, we.hPos, null, Color.White, 0F, Weed._ho, 1, SpriteEffects.None, 1);
             }
             if (!PositionChecker.dd)
             {
@@ -202,6 +205,11 @@ namespace Butts
                 foreach (Enemy en in _enemies)
                     spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
             }
+            if (PositionChecker.dd)
+            {
+                _fontRenderer.DrawText(spriteBatch, ((int)_fullscreen.X / 2), (int)_fullscreen.Y / 2, "Game Over");
+            }
+            _fontRenderer.DrawText(spriteBatch, (!PositionChecker.dd) ? 50 : (int)_fullscreen.X / 2, (!PositionChecker.dd) ? 50 : (int)_fullscreen.Y / 2 - 32, _sc);
             spriteBatch.End();
             base.Draw(gameTime);
         }

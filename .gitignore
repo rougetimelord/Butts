@@ -41,3 +41,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.application
+/Butts/bin/Windows/Debug/app.publish/Butts.exe
+/Butts/bin/Windows/Release/app.publish
+*.manifest

@@ -35,3 +35,6 @@ C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debu
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Butts.application
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\obj\x86\Debug\Butts.exe.manifest
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\obj\x86\Debug\Butts.application
+C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\doritos.png
+C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\mtn.png
+C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\hit.png

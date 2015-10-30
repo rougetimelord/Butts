@@ -28,6 +28,11 @@ C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Rele
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Release\SharpDX.XInput.xml
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Release\SharpDX.RawInput.xml
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Release\SharpDX.Direct3D9.xml
-C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\obj\x86\Release\Butts.csprojResolveAssemblyReference.cache
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\obj\x86\Release\Butts.exe
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\obj\x86\Release\Butts.pdb
+C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Release\Butts.exe.manifest
+C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Release\Butts.application
+C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\obj\x86\Release\Butts.exe.manifest
+C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\obj\x86\Release\Butts.application
+C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\obj\x86\Release\Butts.csprojResolveAssemblyReference.cache
+C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Release\Content\doritos.png
