@@ -79,7 +79,7 @@ namespace Butts
             //arial = Content.Load<SpriteFont>("Arial.xnb");
             _hiAt = this.Content.Load<Texture2D>("HIatt");
             _hi = this.Content.Load<Texture2D>("HI");
-            var fontFilePath = Path.Combine(Content.RootDirectory, "text.fnt");
+            var fontFilePath = Path.Combine(Content.RootDirectory, "text.xml");
             var fontFile = FontHandler.FontLoader.Load(fontFilePath);
             var fontTexture = this.Content.Load<Texture2D>("text_0");
             _fontRenderer = new FontRenderer(fontFile, fontTexture);

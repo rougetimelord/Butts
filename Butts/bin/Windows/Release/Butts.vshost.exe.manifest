@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="Butts.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
+  <asmv1:assemblyIdentity name="Butts.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <description asmv2:iconFile="Icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Butts.exe" size="25512">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Butts.exe" size="26024">
       <assemblyIdentity name="Butts" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>1Xgy4hOzxkFqrRqHErLRqd/e7vA=</dsig:DigestValue>
+        <dsig:DigestValue>uaX6RFkzJuh5Dbmwz0AIIgl6Dds=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -210,6 +210,15 @@
       <dsig:DigestValue>MxCu6ydGOm46ogY8+lkmy/kD8PI=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Content\hit.png" size="10575">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Ypcm80eAAohxj8Mh9kmeAw5JkrY=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Content\Icon.ico" size="4185">
     <hash>
       <dsig:Transforms>
@@ -219,13 +228,22 @@
       <dsig:DigestValue>C6rKGZOof1kx7bT7kbOoFGRzTP0=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\text_0.png" size="6572">
+  <file name="Content\mtn.png" size="672534">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>NVN9r/WXDfwQKpWgTpDpXIjQVZs=</dsig:DigestValue>
+      <dsig:DigestValue>YQAN2NUmo9dbMKzCw5HtU+L06yo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\text_0.png" size="131648">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>6bl35WRwjCEzvsUVD4HFVHtRsHo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Weed.png" size="265373">

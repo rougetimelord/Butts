@@ -28,7 +28,6 @@ C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debu
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\Icon.ico
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\MonoGame.Framework.xml
 C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\text_0.png
-C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\text.fnt
 C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\Weed.png
 C:\Users\user\documents\visual studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\gun.png
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Butts.exe.manifest
@@ -38,3 +37,4 @@ C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\obj\x86\Debug\Bu
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\doritos.png
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\mtn.png
 C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\hit.png
+C:\Users\user\Documents\Visual Studio 2013\Projects\Butts\Butts\bin\Windows\Debug\Content\text.xml
