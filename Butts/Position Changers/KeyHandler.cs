@@ -18,7 +18,6 @@ namespace Butts
         public static void Handler(KeyboardState KeyState, GameTime gameTime)
         {
             Game1._attack = false;
-            go = false;
             if (KeyState.IsKeyDown(Keys.W) | KeyState.IsKeyDown(Keys.Up))
             {
                 Player.hiLocation.Y = Player.hiLocation.Y - Game1._speed;
@@ -43,8 +42,6 @@ namespace Butts
             {
                 Game1._attack = true;
             }
-            if (KeyState.IsKeyDown(Keys.LeftControl))
-                go = true;
             PositionChecker.PosChecker();
         }
         #endregion

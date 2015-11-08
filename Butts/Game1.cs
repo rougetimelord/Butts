@@ -26,6 +26,7 @@ namespace Butts
         static List<Enemy> _enemies = new List<Enemy>();
         static List<Weed> _weeds = new List<Weed>();
         static float _t = 0;
+        public static bool pause = false;
         List<int> _k = new List<int>();
         string _sc;
         int _s = 0, _i=0;
@@ -101,20 +102,49 @@ namespace Butts
         {
             // TODO: Unload any non ContentManager content here
         }
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
+        public void Simulate(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
             KeyHandler.Handler(Keyboard.GetState(), gameTime);
             if (Position_Changers.Tilt._r)
                 Position_Changers.Tilt.Update();
+            //If no enemies add them or t = 15
+            if (_enemies.Count == 0 || _t == 15)
+                _enemies.Add(new Enemy());
+            int i = 0;
+            foreach (Enemy en in _enemies)
+            {
+                //Update the enemies
+                en.Update(Player.hiLocation);
+                if (!en.alive)
+                {
+                    //if dead add this instance to the "kill" list
+                    _k.Add(i);
+                }
+                //increase index
+                i++;
+            }
+            int i2 = 0;
+            for (i = (_k.Count != 0) ? 0 : 1; i < _k.Count; i++)
+            {
+                //kill them
+                //Some glitches when multiple enemies are killed on the same update
+                if (_k[i] >= 0)
+                {
+                    if (!PositionChecker.dd)
+                        _s++;
+                    _enemies.RemoveAt(_k[i] - i2);
+                    i2++;
+                }
+            }
+            _k.Clear();
+            //Set draw position of the attack shape
+            _attacker = new Vector2(Player.hiLocation.X - 75, Player.hiLocation.Y - 75);
+            //Increment or reset spawn timer
+            _t = (_t > 30) ? 0 : _t + 1;
+            _sc = _s.ToString();
+        }
+        public void WeedUpdate()
+        {
             if (_s >= 419)
             {
                 //blaze it code
@@ -135,51 +165,31 @@ namespace Butts
             {
                 //update position
                 we.Update();
-                if(we.position.Y > _fullscreen.Y)
+                if (we.position.Y > _fullscreen.Y)
                     wk.Add(wr);
                 wr++;
             }
             int w2 = 0;
-            for (int wi = (wk.Count != 0) ? 0 : 1; wi < wk.Count; wi++ )
+            for (int wi = (wk.Count != 0) ? 0 : 1; wi < wk.Count; wi++)
             {
                 _weeds.RemoveAt(wk[wi] - w2);
                 w2++;
             }
-                //If no enemies add them or t = 15
-            if (_enemies.Count == 0 || _t == 15)
-                _enemies.Add(new Enemy());
-            int i = 0;
-            foreach (Enemy en in _enemies)
-            {
-                //Update the enemies
-                en.Update(Player.hiLocation);
-                if (!en.alive)
-                {
-                    //if dead add this instance to the "kill" list
-                    _k.Add(i);
-                }
-                //increase index
-                i++;
-            }
-           int i2 = 0;
-           for (i = (_k.Count != 0) ? 0 : 1; i < _k.Count; i++)
-            {
-               //kill them
-               //Some glitches when multiple enemies are killed on the same update
-                if (_k[i] >= 0)
-                {
-                    if(!PositionChecker.dd)
-                        _s++;
-                    _enemies.RemoveAt(_k[i]-i2);
-                    i2++;
-                }
-            }
-            _k.Clear();
-            //Set draw position of the attack shape
-            _attacker = new Vector2(Player.hiLocation.X - 75, Player.hiLocation.Y - 75);
-            //Increment or reset spawn timer
-            _t = (_t > 30) ? 0 : _t+1;
-            _sc = _s.ToString();
+        }
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
+                pause = !pause;
+            if (!pause)
+                Simulate(gameTime);
+            WeedUpdate();
             base.Update(gameTime);
         }
 

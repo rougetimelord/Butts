@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Butts
 {
-    class Weed
+    public class Weed
     {
         Random _r = new Random();
         public Vector2 position = new Vector2(), hPos = new Vector2();
@@ -18,6 +18,7 @@ namespace Butts
         public Color c;
         public Texture2D sprite;
         int time = 0, hTime = 0, hThresh;
+        static List<int> wk = new List<int>();
         public Weed()
         {
             position.Y = 0;
