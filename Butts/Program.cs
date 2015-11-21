@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.IO;
 #endregion
 
 namespace Butts
@@ -11,7 +12,22 @@ namespace Butts
     /// <summary>
     /// The main class.
     /// </summary>
-    [Guid("564B1F2B-09E4-4C30-B2E9-3BB82AAC76DF")]
+    public static class G
+    {
+        public static string Make()
+        {
+            string g = "";
+            var p = Directory.GetCurrentDirectory() + @"\GUID.txt";
+            if (File.Exists(p))
+                g = File.ReadAllText(p);
+            else
+            {
+                g = Guid.NewGuid().ToString();
+                File.WriteAllText(p, g);
+            }
+            return g;
+        }
+    }
     public static class Program
     {
         /// <summary>
@@ -20,7 +36,7 @@ namespace Butts
         [STAThread]
         static void Main()
         {
-            
+            Guid g = new Guid(G.Make());
             using (var game = new Game1())
                 game.Run();
         }
