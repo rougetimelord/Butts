@@ -14,12 +14,16 @@ namespace Butts
     /// </summary>
     public static class G
     {
+        //GUID class
         public static string Make()
         {
             string g = "";
             var p = Directory.GetCurrentDirectory() + @"\GUID.txt";
+            //Probably horrible practice, pls user don't touch that file
+            //Maybe write to .dll or .guid or something not .txt
             if (File.Exists(p))
                 g = File.ReadAllText(p);
+            //For sure horrible practice and could be simplified
             else
             {
                 g = Guid.NewGuid().ToString();
@@ -36,6 +40,7 @@ namespace Butts
         [STAThread]
         static void Main()
         {
+            //Set GUID
             Guid g = new Guid(G.Make());
             using (var game = new Game1())
                 game.Run();

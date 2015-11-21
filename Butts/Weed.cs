@@ -8,10 +8,12 @@ namespace Butts
     public class Weed
     {
         Random _r = new Random();
+        //hPos is hit marker position
         public Vector2 position = new Vector2(), hPos = new Vector2();
+        //_ho is hit marker origin
         public static Vector2 _ho;
         public static Texture2D _hit, _sprite0, _sprite1, _sprite2, _sprite3;
-        //Sprites are in index
+        //Sprites are in index form
         public float rot, scale;
         public Color c;
         public Texture2D sprite;
@@ -19,11 +21,16 @@ namespace Butts
         static List<int> wk = new List<int>();
         public Weed()
         {
+            //Constructor sets all variables needed
             position.Y = 0;
             position.X = _r.Next((int)Game1._fullscreen.X);
+            //Random degree of rotation
             rot = _r.Next(361);
+            //Make random color
             c = new Color(_r.Next(10, 256), _r.Next(10, 256), _r.Next(10, 256), _r.Next(200, 256));
+            //Make random scale factor 
             scale = ((float)_r.Next(10, 100) / 100);
+            //Makes random threshold to make a hit marker
             hThresh = _r.Next(5, 25);
             switch(_r.Next(4))
             {
@@ -59,16 +66,19 @@ namespace Butts
         }
         public void Update()
         {
+            //Increment time counters
             time++;
             hTime++;
             if (time == 20)
             {
+                //Every 20 updates rotate 1 degree
                 rot--;
                 time = 0;
             }
             position.Y++;
             if (hTime >= hThresh)
             {
+                //Every hThresh updates draw a hit marker somewhere randomly
                 hPos.X = _r.Next((int)Game1._fullscreen.X);
                 hPos.Y = _r.Next((int)Game1._fullscreen.Y);
                 hTime = 0;

@@ -13,10 +13,11 @@ namespace Butts
 {
     static class KeyHandler
     {
-        public static Boolean go = false;
+        //Change player location if right key is pushed 
         #region KeyHandler
         public static void Handler(KeyboardState KeyState, GameTime gameTime)
         {
+            //Clear attack state on every update
             Game1._attack = false;
             if (KeyState.IsKeyDown(Keys.W) | KeyState.IsKeyDown(Keys.Up))
             {
@@ -40,8 +41,10 @@ namespace Butts
             }
             if (KeyState.IsKeyDown(Keys.Space))
             {
+                //Attack
                 Game1._attack = true;
             }
+            //Validate new position
             PositionChecker.PosChecker();
         }
         #endregion

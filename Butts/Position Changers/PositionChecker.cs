@@ -7,7 +7,7 @@ namespace Butts
 {
     class PositionChecker
     {
-        public static bool dd = false;
+        public static bool dead = false;
         public static void PosChecker()
         {
             //Check top

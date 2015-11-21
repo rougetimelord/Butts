@@ -9,7 +9,8 @@ namespace Butts
         public static Vector2 hiLocation;
         public Player()
         {
-            hiLocation = new Vector2(400, 300);
+            hiLocation = new Vector2(Game1._fullscreen.X / 2, Game1._fullscreen.Y / 2);
+            //Set initial position in middle of screen
         }
     }
 }
