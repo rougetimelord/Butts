@@ -245,6 +245,9 @@ namespace Butts
                 //If dead draw "game over" in the center of the screen
                 _fontRenderer.DrawText(spriteBatch, (int)_fullscreen.X / 2 -  54, (int)_fullscreen.Y / 2, "Game Over");
             }
+            //If alive and paused draw pause text
+            if(pause && !PositionChecker.dead)
+                _fontRenderer.DrawText(spriteBatch, (int)_fullscreen.X / 2 - 32, (int)_fullscreen.Y / 2, "Paused");
             //If alive draw score in top left if dead draw it in the middle
             _fontRenderer.DrawText(spriteBatch, (!PositionChecker.dead) ? 50 : (int)_fullscreen.X / 2, (!PositionChecker.dead) ? 50 : (int)_fullscreen.Y / 2 - 32, _sc);
             spriteBatch.End();
