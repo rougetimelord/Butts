@@ -29,6 +29,7 @@ namespace Butts
         static List<Enemy> _enemies = new List<Enemy>();
         static List<Weed> _weeds = new List<Weed>();
         static float _t = 0;
+        public static KeyboardState oldKey = Keyboard.GetState();
         public static bool pause = false;
         List<int> _k = new List<int>();
         string _sc;
@@ -203,8 +204,13 @@ namespace Butts
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             //Pause key check
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
+            KeyboardState newKey = Keyboard.GetState();
+            if (newKey.IsKeyDown(Keys.LeftControl) && oldKey.IsKeyUp(Keys.LeftControl))
+            {
                 pause = !pause;
+            }
+
+            oldKey = newKey;
             //If not paused gogogogo
             if (!pause && !PositionChecker.dead)
                 Simulate(gameTime);
