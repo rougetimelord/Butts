@@ -18,11 +18,13 @@ namespace Butts
         public static string Make()
         {
             string g = "";
-            var p = Directory.GetCurrentDirectory() + @"\GUID.txt";
+            var p = Directory.GetCurrentDirectory() + @"\GUID.butt";
             //Probably horrible practice, pls user don't touch that file
             //Maybe write to .dll or .guid or something not .txt
             if (File.Exists(p))
+            {
                 g = File.ReadAllText(p);
+            }
             //For sure horrible practice and could be simplified
             else
             {
