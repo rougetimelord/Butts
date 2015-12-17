@@ -118,8 +118,8 @@ namespace Butts
             //if (Position_Changers.Tilt._r)
                 //Position_Changers.Tilt.Update();
             //If no enemies add them or t = 15
-            if (_enemies.Count == 0 || _t == 15)
-                _enemies.Add(new Enemy(_s));
+            //if (_enemies.Count == 0 || _t == 15)
+                //_enemies.Add(new Enemy(_s));
             int i = 0;
             foreach (Enemy en in _enemies)
             {

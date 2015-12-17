@@ -45,16 +45,24 @@ namespace Butts
             if (KeyState.IsKeyDown(Keys.Space))
             {
                 //Attack
-                if (attackHold <= 250 && attackWait <= 0)
+                if (attackHold <= 200 && attackWait <= 0)
                 {
+                    //If not held attack
                     Game1._attack = true;
                     attackHold++;
                 }
+                if(attackHold >= 250)
+                {
+                    //If held to long block attack for 15 frames
+                    attackHold = 0;
+                    attackWait = 15;
+                }
             }
-            if (KeyState.IsKeyUp(Keys.Space))
+            if(KeyState.IsKeyUp(Keys.Space))
             {
+                //Reset hold and pause on key up
                 attackHold = 0;
-                attackWait = 15;
+                attackWait = 0;
             }
             //Validate new position
             PositionChecker.PosChecker();
