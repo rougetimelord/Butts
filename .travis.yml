@@ -1,6 +1,0 @@
-language: csharp
-solution: Butts.sln
-mono:
-  - latest
-install:
-  - sudo apt-get install libmonogame-cil-dev monodevelop-monogame
