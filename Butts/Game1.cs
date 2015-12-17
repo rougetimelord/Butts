@@ -119,7 +119,7 @@ namespace Butts
                 //Position_Changers.Tilt.Update();
             //If no enemies add them or t = 15
             if (_enemies.Count == 0 || _t == 15)
-                _enemies.Add(new Enemy());
+                _enemies.Add(new Enemy(_s));
             int i = 0;
             foreach (Enemy en in _enemies)
             {
@@ -244,7 +244,7 @@ namespace Butts
                 spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : _attacker, Color.Red);
                 spriteBatch.Draw(_hi, Player.hiLocation, Color.White);
                 foreach (Enemy en in _enemies)
-                    spriteBatch.Draw(_hi, en.eLoc, Color.Purple);
+                    spriteBatch.Draw(_hi, en.eLoc, en.color);
             }
             if (PositionChecker.dead)
             {
