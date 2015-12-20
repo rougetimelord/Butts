@@ -232,5 +232,7 @@ _Pvt_Extensions
 Butts/Content/Thumbs.db
 *.suo
 
-# GUID stuff
+# Misc stuff
 *.butt
+*.exe
+*.pfx
