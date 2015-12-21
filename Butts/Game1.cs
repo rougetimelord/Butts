@@ -245,7 +245,7 @@ namespace Butts
                 spriteBatch.Draw(_hi, Player.hiLocation, Color.Pink);
                 foreach (Enemy en in _enemies)
                     spriteBatch.Draw(_hi, en.eLoc, en.color);
-                _fontRenderer.DrawText(spriteBatch, (int)_fullscreen.X - 50, 10, KeyHandler.timer);
+                _fontRenderer.DrawText(spriteBatch, (int)_fullscreen.X - 100, 50, KeyHandler.timer);
             }
             if (PositionChecker.dead)
             {
