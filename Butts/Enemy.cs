@@ -24,8 +24,10 @@ namespace Butts
             posTypes.Add(0);
             if (score >= 10)
             {
-                //If seconds >= 25 add type 2 AI
+                //If seconds >= 10 add type 2 AI
                 posTypes.Add(1);
+                if (score >= 25)
+                    posTypes.Add(2);
             }
             int typeI = r.Next(posTypes.Count);
             switch (typeI)
@@ -37,6 +39,10 @@ namespace Butts
                     break;
                 case (1):
                     color = Color.Yellow;
+                    type = posTypes[typeI];
+                    break;
+                case(2):
+                    color = Color.Orange;
                     type = posTypes[typeI];
                     break;
             }
@@ -70,6 +76,9 @@ namespace Butts
                     break;
                 case (1):
                     type1Update(pLoc);
+                    break;
+               case(2):
+                    type2Update(pLoc);
                     break;
                 default:
                     type0Update(pLoc);
@@ -108,6 +117,18 @@ namespace Butts
                 if (eLoc.Y < pLoc.Y)
                     eLoc.Y += 2;
             }
+        }
+        public void type2Update(Vector2 pLoc)
+        {
+            //AI does an update
+            if (eLoc.X > pLoc.X)
+                eLoc.X -= (float)Math.Log(eLoc.X) - 3;
+            if (eLoc.X < pLoc.X)
+                eLoc.X += (float)Math.Log(eLoc.X) - 3;
+            if (eLoc.Y > pLoc.Y)
+                eLoc.Y -= 5*(float)Math.Sin(eLoc.Y) + 3;
+            if (eLoc.Y < pLoc.Y)
+                eLoc.Y += 5*(float)Math.Sin(eLoc.Y) + 3;
         }
     }
 }
