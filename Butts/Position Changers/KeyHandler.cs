@@ -16,11 +16,11 @@ namespace Butts
         //Change player location if right key is pushed 
         static int attackHold = 0;
         static int attackWait = 0;
+        public static string timer = "250";
         #region KeyHandler
         public static void Handler(KeyboardState KeyState, GameTime gameTime)
         {
             //Clear attack state on every update
-            attackWait--;
             Game1._attack = false;
             if (KeyState.IsKeyDown(Keys.W) | KeyState.IsKeyDown(Keys.Up))
             {
@@ -45,17 +45,24 @@ namespace Butts
             if (KeyState.IsKeyDown(Keys.Space))
             {
                 //Attack
-                if (attackHold <= 200 && attackWait <= 0)
+                if (attackHold <= 250 && attackWait <= 0)
                 {
                     //If not held attack
                     Game1._attack = true;
                     attackHold++;
+                    timer = ((int)250 - (int)attackHold).ToString();
                 }
                 if(attackHold >= 250)
                 {
                     //If held to long block attack for 15 frames
                     attackHold = 0;
-                    attackWait = 15;
+                    attackWait = 25;
+                    timer = "25C";
+                }
+                if (attackWait > 0)
+                {
+                    timer = String.Format("{0}C",attackWait.ToString());
+                    attackWait--;
                 }
             }
             if(KeyState.IsKeyUp(Keys.Space))
@@ -63,6 +70,7 @@ namespace Butts
                 //Reset hold and pause on key up
                 attackHold = 0;
                 attackWait = 0;
+                timer = "250";
             }
             //Validate new position
             PositionChecker.PosChecker();
