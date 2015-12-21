@@ -20,7 +20,7 @@ namespace Butts.Position_Changers
         public static void Update()
         {
             //var motion = Accelerometer.GetDefault();
-            //ccelerometerReading reading = motion.GetCurrentReading();
+            //AccelerometerReading reading = motion.GetCurrentReading();
             //if (reading.AccelerationX >= _thresh)
                 //Player.hiLocation.X += 5;
             //if (reading.AccelerationX <= -_thresh)
