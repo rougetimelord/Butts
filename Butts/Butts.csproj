@@ -119,7 +119,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Butts_TemporaryKey.pfx" />
     <Content Include="Content\text.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
