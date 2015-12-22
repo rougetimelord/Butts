@@ -33,7 +33,7 @@ namespace Butts
         public static bool pause = false;
         List<int> _k = new List<int>();
         string _sc;
-        int _s = 0, _i=0;
+        int _s = 420, _i=0;
         FontRenderer _fontRenderer;
         int wr = 0;
         List<int> wk = new List<int>();
@@ -209,7 +209,14 @@ namespace Butts
             {
                 pause = !pause;
             }
-
+            if ((newKey.IsKeyDown(Keys.Space) && oldKey.IsKeyUp(Keys.Space)) && PositionChecker.dead)
+            {
+                Player.hiLocation = new Vector2(Game1._fullscreen.X / 2, Game1._fullscreen.Y / 2);
+                PositionChecker.dead = false;
+                _enemies.Clear();
+                _s = 0;
+                _weeds.Clear();
+            }
             oldKey = newKey;
             //If not paused gogogogo
             if (!pause && !PositionChecker.dead)
