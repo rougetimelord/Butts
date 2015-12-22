@@ -33,7 +33,7 @@ namespace Butts
         public static bool pause = false;
         List<int> _k = new List<int>();
         string _sc;
-        int _s = 420, _i=0;
+        int _s = 0, _i=0;
         FontRenderer _fontRenderer;
         int wr = 0;
         List<int> wk = new List<int>();
