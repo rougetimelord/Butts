@@ -149,8 +149,6 @@ namespace Butts
             }
             //Clear "kill" list
             _k.Clear();
-            //Set draw position of the attack shape
-            _attacker = new Vector2(Player.hiLocation.X - 75, Player.hiLocation.Y - 75);
             //Increment or reset spawn timer
             _t = (_t > 15) ? 0 : _t + 1;
             //Turn int score into a string
@@ -248,8 +246,8 @@ namespace Butts
             if (!PositionChecker.dead)
             {
                 //If alive draw player, attack area, and enemies
-                spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : _attacker, Color.Red);
-                spriteBatch.Draw(_hi, Player.hiLocation, Color.Pink);
+                spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : Player.hiLocation, null, Color.Red);
+                spriteBatch.Draw(_hi, Player.hiLocation, null, Color.Pink, 0F, new Vector2(_hi.Width / 2, _hi.Height / 2), 1F, SpriteEffects.None, 1F);
                 foreach (Enemy en in _enemies)
                     spriteBatch.Draw(_hi, en.eLoc, en.color);
                 _fontRenderer.DrawText(spriteBatch, (int)_fullscreen.X - 100, 50, KeyHandler.timer);
