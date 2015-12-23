@@ -98,7 +98,7 @@ namespace Butts
             if (Game1._attack && (eLoc.X >= pLoc.X - 100 && eLoc.X <= pLoc.X + 100) && (eLoc.Y >= pLoc.Y - 100 && eLoc.Y <= pLoc.Y + 100))
                   alive = false;
             //If enemy hits player, player dies
-            if (((eLoc.X + 50 <= Player.hiLocation.X + 50 || eLoc.X <= Player.hiLocation.X + 50) && (eLoc.X + 50 >= Player.hiLocation.X || eLoc.X >= Player.hiLocation.X)) && ((eLoc.Y + 50 <= Player.hiLocation.Y + 50 || eLoc.Y <= Player.hiLocation.Y + 50) && (eLoc.Y + 50 >= Player.hiLocation.Y || eLoc.Y >= Player.hiLocation.Y)))
+            if ((eLoc.X >= Player.hiLocation.X - 50 && eLoc.X <= Player.hiLocation.X + 50) && (eLoc.Y >= Player.hiLocation.Y - 50 && eLoc.Y <= Player.hiLocation.Y + 50))
                 PositionChecker.dead = true;
         }
         public void type0Update(Vector2 pLoc)
