@@ -26,7 +26,8 @@ namespace Butts
             {
                 //If seconds >= 10 add type 2 AI
                 posTypes.Add(1);
-                posTypes.Add(2);
+                if(score >= 15)
+                    posTypes.Add(2);
                 if (score >= 25)
                     posTypes.Add(3);
             }
