@@ -30,28 +30,29 @@ namespace Butts
                     posTypes.Add(2);
                 if (score >= 25)
                     posTypes.Add(3);
+                if (score >= 50)
+                    posTypes.Add(4);
             }
             int typeI = r.Next(posTypes.Count);
+            type = posTypes[typeI];
             switch (typeI)
             {
                 //pick type
                 case (0):
                     color = Color.Purple;
-                    type = posTypes[typeI];
                     break;
                 case (1):
                     color = Color.Yellow;
-                    type = posTypes[typeI];
                     break;
                 case(2):
                     color = Color.Green;
-                    type = posTypes[typeI];
                     break;
                 case (3):
                     color = Color.Orange;
-                    type = posTypes[typeI];
                     break;
-
+                case (4):
+                    color = Color.Blue;
+                    break;
             }
             switch(r.Next(4))
             {
@@ -120,7 +121,7 @@ namespace Butts
                 eLoc.X -= 5;
             if (eLoc.X < pLoc.X)
                 eLoc.X += 5;
-            if (eLoc.X <= pLoc.X + 100 && eLoc.X >= pLoc.X - 25 )
+            if (eLoc.X <= pLoc.X + 50 && eLoc.X >= pLoc.X - 50)
             {
                 if (eLoc.Y > pLoc.Y)
                     eLoc.Y -= 2;
@@ -133,9 +134,9 @@ namespace Butts
             //AI does an update
             if (eLoc.Y > pLoc.Y)
                 eLoc.Y -= 5;
-            if (eLoc.Y < pLoc.X)
+            if (eLoc.Y < pLoc.Y)
                 eLoc.Y += 5;
-            if (eLoc.Y <= pLoc.Y + 100 && eLoc.Y >= pLoc.Y - 25)
+            if (eLoc.Y <= pLoc.Y + 50 && eLoc.Y >= pLoc.Y - 50)
             {
                 if (eLoc.X > pLoc.X)
                     eLoc.X -= 2;
