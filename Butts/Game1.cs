@@ -248,7 +248,7 @@ namespace Butts
             if (!PositionChecker.dead)
             {
                 //If alive draw player, attack area, and enemies
-                spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : _attacker, Color.Red);
+                spriteBatch.Draw(_hiAt, (!_attack) ? _fullscreen : _attacker, new Color(255,0,0,5));
                 spriteBatch.Draw(_hi, Player.hiLocation, Color.Pink);
                 foreach (Enemy en in _enemies)
                     spriteBatch.Draw(_hi, en.eLoc, en.color);
