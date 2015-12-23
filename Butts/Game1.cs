@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -249,7 +250,7 @@ namespace Butts
                 if(_attack)
                     spriteBatch.Draw(_hiAt, Player.hiLocation, null, new Color(255,0,0,5),0F,new Vector2(_hiAt.Width/2,_hiAt.Height/2),1F,SpriteEffects.None,1F);
                 spriteBatch.Draw(_hi, Player.hiLocation, null, Color.Pink, 0F, new Vector2(_hi.Width / 2, _hi.Height / 2), 1F, SpriteEffects.None, 1F);
-                foreach (Enemy en in _enemies)
+                foreach (Enemy en in _enemies.OrderBy(o => o.type))
                     spriteBatch.Draw(_hi, en.eLoc, null, en.color, 0F, new Vector2(_hi.Width / 2, _hi.Height / 2), 1F, SpriteEffects.None, 0F);
                 _fontRenderer.DrawText(spriteBatch, (int)_fullscreen.X - 100, 50, KeyHandler.timer);
             }
