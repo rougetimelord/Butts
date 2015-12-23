@@ -90,7 +90,10 @@ namespace Butts
                     break;
                 case (3):
                     type3Update(pLoc);
-                        break;
+                    break;
+               case (4):
+                   type4Update(pLoc);
+                   break;
                 default:
                     type0Update(pLoc);
                     break;
@@ -155,6 +158,18 @@ namespace Butts
                 eLoc.Y -= 5*(float)Math.Sin(eLoc.Y) + 3;
             if (eLoc.Y < pLoc.Y)
                 eLoc.Y += 5*(float)Math.Sin(eLoc.Y) + 3;
+        }
+        public void type4Update(Vector2 pLoc)
+        {
+            //AI does an update
+            if (eLoc.X > pLoc.X)
+                eLoc.X -= 7;
+            if (eLoc.X < pLoc.X)
+                eLoc.X += 7;
+            if (eLoc.Y > pLoc.Y)
+                eLoc.Y -= 7;
+            if (eLoc.Y < pLoc.Y)
+                eLoc.Y += 7;
         }
     }
 }
