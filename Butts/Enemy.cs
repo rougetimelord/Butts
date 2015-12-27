@@ -163,13 +163,13 @@ namespace Butts
         {
             //AI does an update
             if (eLoc.X > pLoc.X)
-                eLoc.X -= 7;
+                eLoc.X -= (eLoc.X - 7 < pLoc.X)? eLoc.X-pLoc.X : 7;
             if (eLoc.X < pLoc.X)
-                eLoc.X += 7;
+                eLoc.X += (eLoc.X + 7 > pLoc.X) ? pLoc.X-eLoc.X: 7;
             if (eLoc.Y > pLoc.Y)
-                eLoc.Y -= 7;
+                eLoc.Y -= (eLoc.Y - 7 < pLoc.Y) ? eLoc.Y - pLoc.Y : 7;
             if (eLoc.Y < pLoc.Y)
-                eLoc.Y += 7;
+                eLoc.Y += (eLoc.Y + 7 > pLoc.Y) ? pLoc.Y - eLoc.Y : 7;
         }
     }
 }
