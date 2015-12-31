@@ -60,11 +60,10 @@ namespace Butts
             var form = System.Windows.Forms.Control.FromHandle(Window.Handle).FindForm();
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.Location = new System.Drawing.Point(0, 0);
-            int[] fuck = { GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height };
             //Set bounds
-            _fullscreen = new Vector2(fuck[0], fuck[1]);
-            graphics.PreferredBackBufferHeight = fuck[1];
-            graphics.PreferredBackBufferWidth = fuck[0];
+            _fullscreen = new Vector2(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             graphics.ApplyChanges();
             #endregion
             //Spawn player
