@@ -27,7 +27,8 @@ namespace Butts
         static public Vector2 _fullscreen, _attacker;
         public static float _speed = 5;
         public static bool _attack = false;
-        static List<Enemy> _enemies = new List<Enemy>();
+        static Dictionary<int, Enemy> _enemiesDict = new Dictionary<int, Enemy>();
+        int enemyID = 0;
         static List<Weed> _weeds = new List<Weed>();
         static float _t = 0;
         public static KeyboardState oldKey = Keyboard.GetState();
@@ -118,34 +119,29 @@ namespace Butts
             //if (Position_Changers.Tilt._r)
             //Position_Changers.Tilt.Update();
             //If no enemies or t = 15 add them
-            if (_enemies.Count == 0 || _t == 15)
-                _enemies.Add(new Enemy(_s));
+            if (_enemiesDict.Count == 0 || _t == 15)
+            {
+                _enemiesDict.Add(enemyID, new Enemy(_s));
+                enemyID++;
+            }
             int i = 0;
-            foreach (Enemy en in _enemies)
+            foreach (KeyValuePair<int,Enemy> en in _enemiesDict)
             {
                 //Update all enemies
-                en.Update(Player.hiLocation);
-                if (!en.alive)
+                en.Value.Update(Player.hiLocation);
+                if (!en.Value.alive)
                 {
-                    //if dead add this instance to the "kill" list
-                    _k.Add(i);
+                    //if dead add this ID to the "kill" list
+                    _k.Add(en.Key);
                 }
-                //increase index
-                i++;
             }
-            int i2 = 0;
             for (i = (_k.Count != 0) ? 0 : 1; i < _k.Count; i++)
             {
-                //Kill them
-                if (_k[i] >= 0)
-                {
-                    //If player is alive add score
-                    //Unless you play in spook mode
-                    if (!PositionChecker.dead)
-                        _s++;
-                    _enemies.RemoveAt(_k[i] - i2);
-                    i2++;
-                }
+                //If player is alive add score
+                //Unless you play in spook mode
+                if (!PositionChecker.dead)
+                    _s++;
+                _enemiesDict.Remove(_k[i]);
             }
             //Clear "kill" list
             _k.Clear();
@@ -211,9 +207,10 @@ namespace Butts
             {
                 Player.hiLocation = new Vector2(Game1._fullscreen.X / 2, Game1._fullscreen.Y / 2);
                 PositionChecker.dead = false;
-                _enemies.Clear();
+                _enemiesDict.Clear();
                 _s = 0;
                 _weeds.Clear();
+                enemyID = 0;
             }
             oldKey = newKey;
             //If not paused gogogogo
@@ -249,8 +246,8 @@ namespace Butts
                 if(_attack)
                     spriteBatch.Draw(_hiAt, Player.hiLocation, null, new Color(255,0,0,5),0F,new Vector2(_hiAt.Width/2,_hiAt.Height/2),1F,SpriteEffects.None,1F);
                 spriteBatch.Draw(_hi, Player.hiLocation, null, Color.Pink, 0F, new Vector2(_hi.Width / 2, _hi.Height / 2), 1F, SpriteEffects.None, 1F);
-                foreach (Enemy en in _enemies.OrderBy(o => o.type))
-                    spriteBatch.Draw(_hi, en.eLoc, null, en.color, 0F, new Vector2(_hi.Width / 2, _hi.Height / 2), 1F, SpriteEffects.None, 0F);
+                foreach (KeyValuePair<int,Enemy> en in _enemiesDict.OrderBy(o => o.Value.type))
+                    spriteBatch.Draw(_hi, en.Value.eLoc, null, en.Value.color, 0F, new Vector2(_hi.Width / 2, _hi.Height / 2), 1F, SpriteEffects.None, 0F);
                 _fontRenderer.DrawText(spriteBatch, (int)_fullscreen.X - 100, 50, KeyHandler.timer);
             }
             if (PositionChecker.dead)
