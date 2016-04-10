@@ -25,19 +25,18 @@ namespace Butts
         SpriteBatch spriteBatch;
         Texture2D _hi, _hiAt;
         static public Vector2 _fullscreen, _attacker;
-        public static float _speed = 5;
-        public static bool _attack = false;
-        static Dictionary<int, Enemy> _enemiesDict = new Dictionary<int, Enemy>();
-        int enemyID = 0;
-        static List<Weed> _weeds = new List<Weed>();
+        static Dictionary<int, Enemy> _enemies = new Dictionary<int, Enemy>();
+        static int enemyID = 0, wr = 0;
+        int _s = 0, _weedTime = 0;
+        public static Boolean debug = false;
+        public static Boolean spawn = (debug) ? false : true;
+        static Dictionary<int, Weed> _weeds = new Dictionary<int, Weed>();
         static float _t = 0;
         public static KeyboardState oldKey = Keyboard.GetState();
         public static bool pause = false;
         List<int> _k = new List<int>();
         string _sc;
-        int _s = 0, _i=0;
         FontRenderer _fontRenderer;
-        int wr = 0;
         List<int> wk = new List<int>();
         #endregion
         public Game1()
@@ -119,13 +118,13 @@ namespace Butts
             //if (Position_Changers.Tilt._r)
             //Position_Changers.Tilt.Update();
             //If no enemies or t = 15 add them
-            if (_enemiesDict.Count == 0 || _t == 15)
+            if ((_enemies.Count == 0 || _t == 15) && spawn)
             {
-                _enemiesDict.Add(enemyID, new Enemy(_s));
+                _enemies.Add(enemyID, new Enemy(_s));
                 enemyID++;
             }
             int i = 0;
-            foreach (KeyValuePair<int,Enemy> en in _enemiesDict)
+            foreach (KeyValuePair<int,Enemy> en in _enemies)
             {
                 //Update all enemies
                 en.Value.Update(Player.hiLocation);
@@ -141,7 +140,7 @@ namespace Butts
                 //Unless you play in spook mode
                 if (!PositionChecker.dead)
                     _s++;
-                _enemiesDict.Remove(_k[i]);
+                _enemies.Remove(_k[i]);
             }
             //Clear "kill" list
             _k.Clear();
@@ -159,33 +158,29 @@ namespace Butts
             {
                 //Start weed effects at 419 to give one frame for sprites to fall
                 if (_s == 419)
-                    _i = 1;
+                    _weedTime = 1;
                 //Reset or add to weed timer
-                _i = (_i == 15) ? 0 : _i + 1;
+                _weedTime = (_weedTime == 15) ? 0 : _weedTime + 1;
             }
-            if (_i == 1)
+            if (_weedTime == 1)
             {
                 //Every 15 updates add new weed
-                _weeds.Add(new Weed());
-            }
-            //wr is wk indexer
-            wr = 0;
-            //Clear weed kill list
-            wk.Clear();
-            foreach (Weed we in _weeds)
-            {
-                //Update position
-                we.Update();
-                //If weed off screen put it on the kill list
-                if (we.position.Y > _fullscreen.Y)
-                    wk.Add(wr);
+                _weeds.Add(wr, new Weed());
                 wr++;
             }
-            int w2 = 0;
-            for (int wi = (wk.Count != 0) ? 0 : 1; wi < wk.Count; wi++)
+            //wr is weed asset id
+            //Clear weed kill list
+            foreach (KeyValuePair<int,Weed> we in _weeds)
             {
-                _weeds.RemoveAt(wk[wi] - w2);
-                w2++;
+                //Update position
+                we.Value.Update();
+                //If weed off screen put it on the kill list
+                if (we.Value.position.Y > _fullscreen.Y)
+                    wk.Add(wr);
+            }
+            foreach(int v in wk)
+            {
+                _weeds.Remove(wr);
             }
         }
         /// <summary>
@@ -207,10 +202,9 @@ namespace Butts
             {
                 Player.hiLocation = new Vector2(Game1._fullscreen.X / 2, Game1._fullscreen.Y / 2);
                 PositionChecker.dead = false;
-                _enemiesDict.Clear();
+                _enemies.Clear();
                 _s = 0;
                 _weeds.Clear();
-                enemyID = 0;
             }
             oldKey = newKey;
             //If not paused gogogogo
@@ -230,24 +224,30 @@ namespace Butts
             GraphicsDevice.Clear(Color.Black);
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            foreach (Weed we in _weeds)
+            foreach (KeyValuePair<int,Weed> we in _weeds)
             {
                 //Draw all the weed stuff
                 //Set origin of draw
-                Vector2 origin = new Vector2(we.sprite.Width / 2, we.sprite.Height / 2);
+                Vector2 origin = new Vector2(we.Value.sprite.Width / 2, we.Value.sprite.Height / 2);
                 //Draw main sprite
-                spriteBatch.Draw(we.sprite, we.position, null, we.c, we.rot, origin, we.scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(we.Value.sprite, we.Value.position, null, we.Value.c, we.Value.rot, origin, we.Value.scale, SpriteEffects.None, 0);
+                if (debug)
+                    _fontRenderer.DrawText(spriteBatch, (int)we.Value.position.X - _hi.Width / 2, (int)we.Value.position.Y - _hi.Height / 2, we.Key.ToString());
                 //Draw hitmarker for that sprite
-                spriteBatch.Draw(Weed._hit, we.hPos, null, Color.White, 0F, Weed._ho, 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(Weed._hit, we.Value.hPos, null, Color.White, 0F, Weed._ho, 1, SpriteEffects.None, 1);
             }
             if (!PositionChecker.dead)
             {
                 //If alive draw player, attack area, and enemies
-                if(_attack)
+                if(KeyHandler._attack)
                     spriteBatch.Draw(_hiAt, Player.hiLocation, null, new Color(255,0,0,5),0F,new Vector2(_hiAt.Width/2,_hiAt.Height/2),1F,SpriteEffects.None,1F);
                 spriteBatch.Draw(_hi, Player.hiLocation, null, Color.Pink, 0F, new Vector2(_hi.Width / 2, _hi.Height / 2), 1F, SpriteEffects.None, 1F);
-                foreach (KeyValuePair<int,Enemy> en in _enemiesDict.OrderBy(o => o.Value.type))
+                foreach (KeyValuePair<int, Enemy> en in _enemies.OrderBy(o => o.Value.type))
+                {
                     spriteBatch.Draw(_hi, en.Value.eLoc, null, en.Value.color, 0F, new Vector2(_hi.Width / 2, _hi.Height / 2), 1F, SpriteEffects.None, 0F);
+                    if (debug)
+                        _fontRenderer.DrawText(spriteBatch, (int)en.Value.eLoc.X - _hi.Width / 2, (int)en.Value.eLoc.Y - _hi.Height / 2, en.Key.ToString());
+                }
                 _fontRenderer.DrawText(spriteBatch, (int)_fullscreen.X - 100, 50, KeyHandler.timer);
             }
             if (PositionChecker.dead)

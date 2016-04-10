@@ -99,7 +99,7 @@ namespace Butts
                     break;
             }
             //If hit by attack die
-            if (Game1._attack && (eLoc.X >= pLoc.X - 100 && eLoc.X <= pLoc.X + 100) && (eLoc.Y >= pLoc.Y - 100 && eLoc.Y <= pLoc.Y + 100))
+            if (KeyHandler._attack && (eLoc.X >= pLoc.X - 100 && eLoc.X <= pLoc.X + 100) && (eLoc.Y >= pLoc.Y - 100 && eLoc.Y <= pLoc.Y + 100))
                   alive = false;
             //If enemy hits player, player dies
             if ((eLoc.X >= Player.hiLocation.X - 50 && eLoc.X <= Player.hiLocation.X + 50) && (eLoc.Y >= Player.hiLocation.Y - 50 && eLoc.Y <= Player.hiLocation.Y + 50))
